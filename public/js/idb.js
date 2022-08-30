@@ -26,7 +26,7 @@ function saveRecord(record) {
 
   const budgetObjectStore = transaction.objectStore('new_transaction');
 
-  // add record to your store with add method.
+  // add record to the budget with add method.
   budgetObjectStore.add(record);
 }
 
@@ -34,14 +34,14 @@ function uploadTransaction() {
   // open a transaction on your pending db
   const transaction = db.transaction(['new_transaction'], 'readwrite');
 
-  // access your pending object store
+  // access your pending object budget
   const budgetObjectStore = transaction.objectStore('new_transaction');
 
-  // get all records from store and set to a variable
+  // get all records from the budget and set to a variable
   const getAll = budgetObjectStore.getAll();
 
   getAll.onsuccess = function() {
-    // if there was data in indexedDb's store, let's send it to the api server
+    // if there was data in indexedDb's budget, let's send it to the api server
     if (getAll.result.length > 0) {
       fetch('/api/transaction', {
         method: 'POST',
@@ -59,7 +59,7 @@ function uploadTransaction() {
 
           const transaction = db.transaction(['new_transaction'], 'readwrite');
           const budgetObjectStore = transaction.objectStore('new_transaction');
-          // clear all items in your store
+          // clear all items in your budget
           budgetObjectStore.clear();
         })
         .catch(err => {
